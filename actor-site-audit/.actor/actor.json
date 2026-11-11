@@ -27,6 +27,117 @@
             "component": "table"
           }
         }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Crawled URL"
+          },
+          "score": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Page score 0-100 (100 minus penalties: error 15, warning 5, info 1)"
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Final HTTP status"
+          },
+          "initialStatus": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "First HTTP status if the URL redirected"
+          },
+          "finalUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL after redirects"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "<title> text"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Meta description"
+          },
+          "h1": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "All <h1> texts"
+          },
+          "canonical": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "rel=canonical href"
+          },
+          "lang": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "<html lang>"
+          },
+          "schemaTypes": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "JSON-LD @type values found"
+          },
+          "issues": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Issues found: level (error/warn/info), code, msg, fix"
+          },
+          "lighthouse": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Lighthouse result for this page: scores, metrics, failing audits"
+          },
+          "skipped": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Reason the page was skipped (e.g. robots.txt)"
+          },
+          "responseMs": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Response time in ms"
+          }
+        }
       }
     }
   },

@@ -7,5 +7,130 @@
   "input": "./input_schema.json",
   "output": "./output_schema.json",
   "dockerfile": "../Dockerfile",
-  "storages": { "dataset": { "actorSpecification": 1, "views": { "overview": { "title": "Screenshots", "transformation": { "fields": ["screenshotUrl", "url", "device", "status", "title", "ok", "error"] }, "display": { "component": "table", "properties": { "screenshotUrl": { "format": "image" } } } } } } }
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Screenshots",
+          "transformation": {
+            "fields": [
+              "screenshotUrl",
+              "url",
+              "device",
+              "status",
+              "title",
+              "ok",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "screenshotUrl": {
+                "format": "image"
+              }
+            }
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Requested URL"
+          },
+          "device": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "desktop, laptop, tablet or mobile"
+          },
+          "format": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "png, jpeg or pdf"
+          },
+          "fullPage": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Whether a full-page screenshot was taken"
+          },
+          "selector": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Element CSS selector, if used"
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if the screenshot was taken"
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "HTTP status of the page"
+          },
+          "finalUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL after redirects"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Page title"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error message if the screenshot failed"
+          },
+          "key": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Key of the file in the key-value store"
+          },
+          "bytes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "File size in bytes"
+          },
+          "screenshotUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Direct link to the screenshot or PDF"
+          }
+        }
+      }
+    }
+  }
 }

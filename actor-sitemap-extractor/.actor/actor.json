@@ -27,6 +27,76 @@
             "component": "table"
           }
         }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL listed in the sitemap"
+          },
+          "lastmod": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "<lastmod> value"
+          },
+          "changefreq": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "<changefreq> value"
+          },
+          "priority": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "<priority> value"
+          },
+          "images": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of <image:image> entries"
+          },
+          "alternates": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "hreflang alternates: hreflang, href"
+          },
+          "sitemap": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Sitemap file the URL came from"
+          },
+          "status": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ],
+            "description": "HTTP status (only with status check)"
+          },
+          "redirectTo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Redirect target (only with status check)"
+          }
+        }
       }
     }
   },

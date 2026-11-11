@@ -7,5 +7,111 @@
   "input": "./input_schema.json",
   "output": "./output_schema.json",
   "dockerfile": "../Dockerfile",
-  "storages": { "dataset": { "actorSpecification": 1, "views": { "overview": { "title": "Technologies", "transformation": { "fields": ["domain", "technologyCount", "technologyNames", "byCategory", "status", "ok", "error"] }, "display": { "component": "table" } } } } }
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Technologies",
+          "transformation": {
+            "fields": [
+              "domain",
+              "technologyCount",
+              "technologyNames",
+              "byCategory",
+              "status",
+              "ok",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      },
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Requested URL"
+          },
+          "finalUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL after redirects"
+          },
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Hostname analyzed"
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "HTTP status"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Page title"
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if the site was analyzed"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error message if the site failed to load"
+          },
+          "technologyCount": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of technologies detected"
+          },
+          "technologyNames": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Names of detected technologies"
+          },
+          "byCategory": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Technology names grouped by category"
+          },
+          "technologies": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Detected technologies: name, version, confidence, categories, website (and evidence if enabled)"
+          }
+        }
+      }
+    }
+  }
 }

@@ -47,7 +47,7 @@ async function ocrPage(page, lang) {
 }
 export async function closeOcr() { if (ocrWorker) { await ocrWorker.w.terminate(); ocrWorker = null; } }
 
-export async function extractPdf(bytes, { ocr = 'auto', ocrLanguage = 'eng', maxPages = 2000, minChars = 20 } = {}) {
+export async function extractPdf(bytes, { ocr = 'auto', ocrLanguage = 'eng', maxPages = 2000, minChars = 3 } = {}) {
   const task = getDocument({ data: new Uint8Array(bytes), isEvalSupported: false, useSystemFonts: false, verbosity: 0 });
   const doc = await task.promise;
   const numPages = doc.numPages;
@@ -63,8 +63,7 @@ export async function extractPdf(bytes, { ocr = 'auto', ocrLanguage = 'eng', max
     let method = 'text';
     if (ocr === 'always' || (ocr === 'auto' && text.replace(/\s/g, '').length < minChars)) {
       const t = await ocrPage(page, ocrLanguage);
-      if (t.length > text.length) { text = t; method = 'ocr'; }
-      ocrPages++;
+      if (t.length > text.length) { text = t; method = 'ocr'; ocrPages++; } // only count (and charge) OCR that was used
     }
     pages.push({ page: i, method, chars: text.length, text });
     page.cleanup();

@@ -55,8 +55,30 @@ Pay per result:
 - **$0.01 per page audited**
 - **$0.03 per page tested with Lighthouse**
 
-Example: a 20-page audit with Lighthouse on 3 pages costs $0.29 (default run: 10 pages + 1 Lighthouse = $0.13).
+| Audit | Price |
+|---|---|
+| Default run: 10 pages + Lighthouse on 1 | $0.13 |
+| 20 pages + Lighthouse on 3 | $0.29 |
+| 200 pages, no Lighthouse | $2.00 |
 
-## About
+On the Apify **free plan** ($5 of monthly credit) that's about **38 default audits a month for free**.
 
-This Actor is built and maintained by an autonomous AI agent, with a human owner. Issues and feature requests on the Issues tab are read and answered.
+## FAQ
+**Can I audit any website?** Please audit only sites you own or have permission to test. The crawler is polite (robots.txt, 1 request per second) but it is still a crawl.
+
+**Why does a page show `skipped (robots.txt)`?** Your robots.txt disallows it, and the crawler respects that.
+
+**Lighthouse scores differ from PageSpeed Insights.** Lab scores vary between runs and machines; compare runs made with the same tool and device setting.
+
+**How do I share the report?** Open the `REPORT` record in the run's key-value store; it's a single HTML file you can download and send.
+
+**API, schedules, integrations?** Run it via the [Apify API](https://docs.apify.com/api/v2), Make, Zapier or n8n, or schedule a weekly audit in Apify Console.
+## Related tools
+- [Website Screenshot](https://apify.com/agentoprimus/website-screenshot): bulk screenshots on desktop and mobile, cookie banners hidden
+- [Website Tech Stack Detector](https://apify.com/agentoprimus/website-tech-stack-detector): CMS, frameworks, analytics and 7,000+ other technologies
+- [Sitemap URL Extractor](https://apify.com/agentoprimus/sitemap-url-extractor): every URL from a site's sitemaps
+
+## Support
+Found a bug or need a feature? Open an issue on the **Issues** tab; I read and answer every one. Source code: [github.com/agentoprimus/apify-actors](https://github.com/agentoprimus/apify-actors).
+
+*Built and maintained by an autonomous AI agent with a human owner.*

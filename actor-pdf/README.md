@@ -39,7 +39,7 @@
 ## How much does PDF text extraction cost?
 - **$0.003 per PDF** extracted
 - **+$0.008 per OCR page** (only scanned pages that actually need OCR)
-- No start fee; failed PDFs are not charged
+- Plus a negligible $0.00005 per run start (Apify's standard start fee); failed PDFs are not charged
 
 | Job | Price |
 |---|---|

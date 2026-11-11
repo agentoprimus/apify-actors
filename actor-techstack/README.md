@@ -84,7 +84,7 @@ Real output for `crawler-test.com` (the `technologies` array is shortened):
 ```
 
 ## How much does tech stack lookup cost?
-**$0.003 per website analyzed** ($3 per 1,000). No start fee; **failed sites are not charged**.
+**$0.003 per website analyzed** ($3 per 1,000). Plus a negligible **$0.00005 per run start** (Apify's standard start fee). **Failed sites are not charged**.
 
 | Job | Price |
 |---|---|

@@ -55,6 +55,8 @@ Pay per result:
 - **$0.01 per page audited**
 - **$0.03 per page tested with Lighthouse**
 
+Plus a negligible $0.00005 per run start (Apify's standard start fee).
+
 | Audit | Price |
 |---|---|
 | Default run: 10 pages + Lighthouse on 1 | $0.13 |

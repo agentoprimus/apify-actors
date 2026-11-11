@@ -17,7 +17,7 @@ Get **every URL listed in a website's XML sitemaps** as a clean table you can ex
 ## Pricing
 - **$0.40 per 1,000 URLs extracted**
 - **+$1.00 per 1,000 URLs** when the status check is enabled
-- No start fee
+- Plus a negligible $0.00005 per run start (Apify's standard start fee)
 
 | Job | Price |
 |---|---|

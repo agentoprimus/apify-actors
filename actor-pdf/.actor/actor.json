@@ -170,5 +170,7 @@
         }
       }
     }
-  }
+  },
+  "minMemoryMbytes": 512,
+  "maxMemoryMbytes": 4096
 }

@@ -51,7 +51,7 @@ One row per URL per device:
 Download the dataset as JSON, CSV, Excel or HTML, or get it through the API. All image files are also stored in the run's key-value store.
 
 ## How much does it cost to screenshot a website?
-**$0.002 per successful screenshot** ($2 per 1,000). There is no start fee, and **failed pages are not charged**, including pages that answer with an HTTP error such as 403 or 404 (they're still captured and listed with `httpError: true`).
+**$0.002 per successful screenshot** ($2 per 1,000). There's a negligible **$0.00005 per run start** (Apify's standard start fee), and **failed pages are not charged**, including pages that answer with an HTTP error such as 403 or 404 (they're still captured and listed with `httpError: true`).
 
 | Job | Screenshots | Price |
 |---|---|---|

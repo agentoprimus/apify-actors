@@ -1,0 +1,35 @@
+{
+  "title": "AI crawler access checker input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "sites": {
+      "title": "Websites",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Domains or URLs, one per line. Up to 20,000 per run.",
+      "prefill": [
+        "github.com",
+        "nytimes.com",
+        "crawler-test.com"
+      ]
+    },
+    "extraPaths": {
+      "title": "Extra paths to test",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Optional paths besides the home page, e.g. /blog/ or /products/. Each bot's access is reported per path."
+    },
+    "maxConcurrency": {
+      "title": "Parallel sites",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30,
+      "default": 10,
+      "description": "How many sites are checked in parallel (2 small requests per site)."
+    }
+  },
+  "required": [
+    "sites"
+  ]
+}

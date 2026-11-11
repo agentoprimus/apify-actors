@@ -1,0 +1,133 @@
+{
+  "actorSpecification": 1,
+  "name": "ai-crawler-access-checker",
+  "title": "AI Crawler Access Checker (robots.txt: GPTBot, ClaudeBot, Perplexity, llms.txt)",
+  "description": "See which AI crawlers a website allows or blocks in robots.txt: GPTBot, OAI-SearchBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot, Bytespider and more, plus llms.txt and sitemap detection. Bulk, for SEO / GEO audits.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "minMemoryMbytes": 128,
+  "maxMemoryMbytes": 1024,
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "site": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Site origin"
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if checked"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error"
+          },
+          "robotsTxtStatus": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "HTTP status of /robots.txt"
+          },
+          "hasRobotsTxt": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "robots.txt present"
+          },
+          "sitemaps": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Sitemap URLs declared"
+          },
+          "hasLlmsTxt": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "/llms.txt present"
+          },
+          "llmsTxtPreview": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "First 500 chars of llms.txt"
+          },
+          "blockedBots": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "AI bots blocked from /"
+          },
+          "allowedBots": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "AI bots allowed on /"
+          },
+          "blocksAITraining": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "all / some / none of the training crawlers blocked"
+          },
+          "blocksAISearch": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "all / some / none of the AI search crawlers blocked"
+          },
+          "bots": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Per bot: bot, owner, purpose, allowed, matching rule, group (and per path)"
+          }
+        }
+      },
+      "views": {
+        "overview": {
+          "title": "Sites",
+          "transformation": {
+            "fields": [
+              "site",
+              "blocksAITraining",
+              "blocksAISearch",
+              "blockedBots",
+              "hasLlmsTxt",
+              "hasRobotsTxt",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  }
+}

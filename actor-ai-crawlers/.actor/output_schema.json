@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "AI crawler access output",
+  "properties": {
+    "sites": {
+      "type": "string",
+      "title": "Sites",
+      "description": "One row per site: blocked/allowed AI bots, llms.txt, sitemaps.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

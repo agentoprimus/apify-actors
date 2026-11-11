@@ -31,9 +31,9 @@ await shootAll(jobs, {
       await store.setValue(key, r.buffer, { contentType: r.contentType });
       row.key = key; row.bytes = r.bytes;
       row.screenshotUrl = storeId ? `https://api.apify.com/v2/key-value-stores/${storeId}/records/${key}` : key;
+      row.httpError = r.status != null && r.status >= 400; // e.g. 403 bot protection, 404
       await Actor.pushData(row);
-      await Actor.charge({ eventName: 'screenshot', count: 1 });
-      ok++;
+      if (!row.httpError) { await Actor.charge({ eventName: 'screenshot', count: 1 }); ok++; } // HTTP errors not charged
     } else {
       await Actor.pushData(row); // failed shots are listed but not charged
     }

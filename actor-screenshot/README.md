@@ -13,7 +13,7 @@
 - 🌙 **Dark mode** (`prefers-color-scheme: dark`)
 - ⏱️ **Wait control**: `load`, `domcontentloaded` or `networkidle`, wait for a selector, or add a delay
 - ✅ **Status reporting**: HTTP status, final URL after redirects, and page title for every page
-- 💸 **Failed pages are not charged**
+- 💸 **Failed pages are not charged**, including pages that return an HTTP error (4xx/5xx, e.g. bot protection). They're still saved so you can see what happened
 
 ## How to take website screenshots
 1. Click **Try for free**.
@@ -51,7 +51,7 @@ One row per URL per device:
 Download the dataset as JSON, CSV, Excel or HTML, or get it through the API. All image files are also stored in the run's key-value store.
 
 ## How much does it cost to screenshot a website?
-**$0.002 per successful screenshot** ($2 per 1,000). There is no start fee, and **failed pages are not charged**.
+**$0.002 per successful screenshot** ($2 per 1,000). There is no start fee, and **failed pages are not charged**, including pages that answer with an HTTP error such as 403 or 404 (they're still captured and listed with `httpError: true`).
 
 | Job | Screenshots | Price |
 |---|---|---|
@@ -69,6 +69,8 @@ On the Apify **free plan** ($5 of monthly credit) that's about **2,500 screensho
 **Some content is missing from my screenshot.** Try `waitUntil: networkidle`, set **Wait for selector** to an element that appears last, or add **Extra delay**. For lazy-loaded images use **Full page** with **Scroll to load** on (default).
 
 **Can I use it via API or on a schedule?** Yes: run it from the [Apify API](https://docs.apify.com/api/v2), from Make, Zapier or n8n, or set a **Schedule** in Apify Console for daily visual monitoring.
+
+**Some sites show an "access denied" page.** A few large sites block automated browsers. Those pages return an HTTP error, are flagged `httpError: true`, and are not charged.
 
 **Is it legal to screenshot websites?** Capturing a public page is like visiting it in a browser. How you use the images (copyright, trademarks) is your responsibility.
 

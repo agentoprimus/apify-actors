@@ -109,6 +109,13 @@
               "null"
             ],
             "description": "Detected technologies: name, version, confidence, categories, website (and evidence if enabled)"
+          },
+          "httpError": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if the page returned HTTP 4xx/5xx (not charged)"
           }
         }
       }

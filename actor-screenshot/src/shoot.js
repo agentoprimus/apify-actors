@@ -60,13 +60,20 @@ async function shootOne(browser, job, { timeoutMs }) {
       contentType = 'application/pdf';
     } else {
       const type = job.format === 'jpeg' ? 'jpeg' : 'png';
-      const opts = { type, ...(type === 'jpeg' ? { quality: job.quality || 80 } : {}), animations: 'disabled', timeout: timeoutMs };
+      const opts = { type, ...(type === 'jpeg' ? { quality: job.quality || 80 } : {}), timeout: timeoutMs };
       if (job.selector) {
         const el = page.locator(job.selector).first();
         await el.waitFor({ timeout: 10000 });
         buf = await el.screenshot(opts);
       } else {
-        buf = await page.screenshot({ ...opts, fullPage: !!job.fullPage });
+        try {
+          buf = await page.screenshot({ ...opts, fullPage: !!job.fullPage });
+        } catch (e) {
+          // Chromium sometimes fails "Unable to capture screenshot" on viewport shots; capture via full-page clip instead.
+          const vp = page.viewportSize();
+          buf = job.fullPage ? await page.screenshot({ ...opts, fullPage: true })
+            : await page.screenshot({ ...opts, fullPage: true, clip: { x: 0, y: 0, width: vp.width, height: vp.height } });
+        }
       }
       contentType = 'image/' + type;
     }

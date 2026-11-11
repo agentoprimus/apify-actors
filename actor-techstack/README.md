@@ -9,7 +9,7 @@
 - 📋 **Bulk**: up to 10,000 domains per run; bare domains like `example.com` are fine
 - 🗂️ Results **grouped by category**, plus a flat list of names for easy filtering in Excel or CSV
 - 🧾 Optional **evidence**: which header, script, cookie, meta tag, DOM element or JavaScript global matched
-- 💸 **Sites that fail to load are not charged**
+- 💸 **Sites that fail to load are not charged**, including sites that answer with an HTTP error (4xx/5xx, e.g. bot protection)
 
 ## How to detect a website's tech stack
 1. Click **Try for free**.
@@ -104,6 +104,8 @@ On the Apify **free plan** ($5 of monthly credit) you can analyze about **1,600 
 **How accurate is it?** Detection uses public signals (HTTP headers, cookies, scripts, meta tags, page elements, JavaScript globals) matched against the open [webappanalyzer](https://github.com/enthec/webappanalyzer) fingerprint database. Server-side tools that leave no trace in the page can't be detected by any tool of this kind.
 
 **Some marketing tools are missing.** Increase **Extra wait after load** (e.g. 5000 ms) so tag managers have time to load their scripts.
+
+**Some big sites show few technologies.** A few large sites block automated browsers and return an error page. Those rows are flagged `httpError: true` and are not charged.
 
 **Does it scan the whole site?** It analyzes the page you give it (usually the home page), which shows the site-wide stack. Add specific URLs if you need a subpage, such as a checkout.
 

@@ -30,9 +30,9 @@ await withBrowser(async (browser) => {
         row = { url, finalUrl: page.finalUrl, domain: new URL(page.finalUrl).hostname, status: page.status, title: page.title, ok: true,
           technologyCount: technologies.length, technologyNames: technologies.map((t) => t.name), byCategory,
           technologies: input.includeEvidence ? technologies : technologies.map(({ evidence, ...t }) => t) };
-        ok++;
+        row.httpError = page.status != null && page.status >= 400; // e.g. 403 bot protection: result likely incomplete
         await Actor.pushData(row);
-        await Actor.charge({ eventName: 'site-analyzed', count: 1 });
+        if (!row.httpError) { await Actor.charge({ eventName: 'site-analyzed', count: 1 }); ok++; } // HTTP errors not charged
         log.info(`ok  ${url}: ${technologies.length} technologies`);
       } catch (e) {
         row = { url, ok: false, error: String(e.message || e).split('\n')[0] };

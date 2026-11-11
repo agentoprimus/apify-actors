@@ -1,0 +1,15 @@
+import { test, before, after } from 'node:test';
+import assert from 'node:assert/strict';
+import http from 'node:http';
+import { withBrowser, auditPage } from '../src/audit.js';
+const bad = '<html><head><title>Bad</title></head><body><img src="x.png"><a href="#"></a><input type="text"><div style="color:#aaa;background:#fff">low contrast text</div><button></button></body></html>';
+const good = '<!doctype html><html lang="en"><head><title>Good page</title></head><body><main><h1>Hello</h1><img src="x.png" alt="A logo"><a href="/a">About us</a><label for="n">Name</label><input id="n" type="text"><button>Send</button></main></body></html>';
+const srv = http.createServer((q, r) => { r.writeHead(200, { 'content-type': 'text/html' }); r.end(q.url === '/good' ? good : bad); });
+let B, G;
+before(async () => { await new Promise((ok) => srv.listen(8793, '127.0.0.1', ok)); [B, G] = await withBrowser(async (b) => [await auditPage(b, 'http://127.0.0.1:8793/bad'), await auditPage(b, 'http://127.0.0.1:8793/good')]); });
+after(() => srv.close());
+const ids = (r) => r.violations.map((v) => v.id);
+test('bad page violations', () => { for (const id of ['image-alt', 'html-has-lang', 'label', 'button-name', 'link-name', 'color-contrast']) assert.ok(ids(B).includes(id), id); });
+test('critical issues counted, score low', () => { assert.ok(B.byImpact.critical >= 1); assert.ok(B.score < 60); });
+test('violation details', () => { const v = B.violations.find((v) => v.id === 'image-alt'); assert.ok(v.helpUrl.startsWith('https://')); assert.ok(v.wcag.length); assert.match(v.examples[0].html, /<img/); });
+test('good page clean', () => { assert.equal(G.violationRules, 0, JSON.stringify(ids(G))); assert.equal(G.score, 100); });

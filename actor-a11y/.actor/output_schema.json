@@ -1,0 +1,24 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Accessibility audit output",
+  "properties": {
+    "report": {
+      "type": "string",
+      "title": "HTML report",
+      "description": "Site summary and per-page results.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/REPORT"
+    },
+    "pages": {
+      "type": "string",
+      "title": "Pages",
+      "description": "One row per page with all violations and fixes.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Summary (JSON)",
+      "description": "Average score, critical/serious counts, top issues across the site.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY"
+    }
+  }
+}

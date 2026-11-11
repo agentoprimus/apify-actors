@@ -1,0 +1,75 @@
+{
+  "title": "Accessibility checker input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Pages to audit",
+      "type": "array",
+      "editor": "requestListSources",
+      "description": "Page URLs to audit. Audit only sites you own or are authorized to test.",
+      "prefill": [
+        {
+          "url": "https://crawler-test.com/"
+        }
+      ]
+    },
+    "crawlSameDomain": {
+      "title": "Crawl same-domain links",
+      "type": "boolean",
+      "default": false,
+      "description": "Also audit pages linked from the start pages (same domain only, 1 page per second), up to Max pages."
+    },
+    "maxPages": {
+      "title": "Max pages",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "default": 10,
+      "description": "Maximum number of pages to audit."
+    },
+    "standard": {
+      "title": "Standard",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "wcag2a",
+        "wcag2aa",
+        "wcag21aa",
+        "wcag22aa"
+      ],
+      "enumTitles": [
+        "WCAG 2.0 A",
+        "WCAG 2.0 AA",
+        "WCAG 2.1 AA (EAA / EN 301 549 / ADA)",
+        "WCAG 2.2 AA"
+      ],
+      "default": "wcag21aa",
+      "description": "Which WCAG rules to test. WCAG 2.1 AA is the level referenced by the European Accessibility Act (EN 301 549) and most ADA cases."
+    },
+    "bestPractices": {
+      "title": "Include best practices",
+      "type": "boolean",
+      "default": false,
+      "description": "Also report axe best-practice rules that aren't strictly WCAG (e.g. landmarks, heading order)."
+    },
+    "device": {
+      "title": "Device",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "desktop",
+        "mobile"
+      ],
+      "enumTitles": [
+        "Desktop 1366x900",
+        "Mobile 390x844"
+      ],
+      "default": "desktop",
+      "description": "Viewport used for the audit."
+    }
+  },
+  "required": [
+    "startUrls"
+  ]
+}

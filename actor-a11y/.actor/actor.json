@@ -1,0 +1,153 @@
+{
+  "actorSpecification": 1,
+  "name": "website-accessibility-checker",
+  "title": "Website Accessibility Checker (WCAG 2.1/2.2, EAA, axe-core)",
+  "description": "Audit web pages for WCAG 2.0/2.1/2.2 A and AA accessibility issues with axe-core: missing alt text, contrast, labels, ARIA, keyboard, language. Per-page score, element-level fixes, site summary and HTML report. For EAA, ADA and EN 301 549 compliance work.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "minMemoryMbytes": 1024,
+  "maxMemoryMbytes": 4096,
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Page URL"
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if audited"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error"
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "HTTP status"
+          },
+          "httpError": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "HTTP 4xx/5xx (not charged)"
+          },
+          "finalUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL after redirects"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Page title"
+          },
+          "standard": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "WCAG standard tested"
+          },
+          "score": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Accessibility score 0-100"
+          },
+          "violationRules": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of rules violated"
+          },
+          "violationNodes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of failing elements"
+          },
+          "byImpact": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Failing elements by impact: critical, serious, moderate, minor"
+          },
+          "rulesPassed": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Rules passed"
+          },
+          "needsReview": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Rules needing manual review"
+          },
+          "axeVersion": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "axe-core version"
+          },
+          "violations": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Violations: id, impact, description, help, helpUrl, wcag, nodeCount, examples (target, html, fix)"
+          }
+        }
+      },
+      "views": {
+        "overview": {
+          "title": "Pages",
+          "transformation": {
+            "fields": [
+              "url",
+              "score",
+              "byImpact",
+              "violationRules",
+              "violationNodes",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  }
+}

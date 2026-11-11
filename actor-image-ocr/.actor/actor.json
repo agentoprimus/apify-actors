@@ -1,0 +1,111 @@
+{
+  "actorSpecification": 1,
+  "name": "image-ocr-text-extractor",
+  "title": "Image to Text OCR (bulk, 20 languages, word boxes)",
+  "description": "Extract text from images by URL with OCR: PNG, JPEG, WebP, GIF, AVIF. 20 languages, confidence scores and optional word bounding boxes. Bulk, only successful images are charged.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "minMemoryMbytes": 512,
+  "maxMemoryMbytes": 4096,
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Image URL"
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if OCR succeeded"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error if failed"
+          },
+          "width": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Image width (px)"
+          },
+          "height": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Image height (px)"
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Recognized text"
+          },
+          "chars": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Characters"
+          },
+          "words": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Word count"
+          },
+          "confidence": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Mean OCR confidence 0-100"
+          },
+          "wordBoxes": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Words with confidence and bbox (if enabled)"
+          }
+        }
+      },
+      "views": {
+        "overview": {
+          "title": "Text",
+          "transformation": {
+            "fields": [
+              "url",
+              "ok",
+              "text",
+              "words",
+              "confidence",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  }
+}

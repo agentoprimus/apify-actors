@@ -1,0 +1,83 @@
+{
+  "title": "Image OCR input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "imageUrls": {
+      "title": "Image URLs",
+      "type": "array",
+      "editor": "requestListSources",
+      "description": "Links to images (PNG, JPEG, WebP, GIF, BMP, AVIF), up to 10,000 per run, max 40 MB each.",
+      "prefill": [
+        {
+          "url": "https://raw.githubusercontent.com/agentoprimus/apify-actors/main/actor-image-ocr/test/fixtures/text.png"
+        }
+      ]
+    },
+    "languages": {
+      "title": "Languages",
+      "type": "array",
+      "editor": "select",
+      "items": {
+        "type": "string",
+        "enum": [
+          "eng",
+          "deu",
+          "fra",
+          "spa",
+          "ita",
+          "por",
+          "nld",
+          "pol",
+          "ces",
+          "rus",
+          "ukr",
+          "tur",
+          "chi_sim",
+          "chi_tra",
+          "jpn",
+          "kor",
+          "ara",
+          "hin",
+          "vie",
+          "ind"
+        ],
+        "enumTitles": [
+          "English",
+          "German",
+          "French",
+          "Spanish",
+          "Italian",
+          "Portuguese",
+          "Dutch",
+          "Polish",
+          "Czech",
+          "Russian",
+          "Ukrainian",
+          "Turkish",
+          "Chinese (simplified)",
+          "Chinese (traditional)",
+          "Japanese",
+          "Korean",
+          "Arabic",
+          "Hindi",
+          "Vietnamese",
+          "Indonesian"
+        ]
+      },
+      "description": "Language(s) of the text. Pick several for mixed-language images.",
+      "default": [
+        "eng"
+      ]
+    },
+    "includeWordBoxes": {
+      "title": "Include word positions",
+      "type": "boolean",
+      "default": false,
+      "description": "Add every word with its confidence and bounding box (x0, y0, x1, y1)."
+    }
+  },
+  "required": [
+    "imageUrls"
+  ]
+}

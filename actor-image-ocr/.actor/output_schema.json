@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Image OCR output",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Recognized text",
+      "description": "One row per image: text, word count, confidence, optional word boxes.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

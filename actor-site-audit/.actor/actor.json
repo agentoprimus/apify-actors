@@ -136,6 +136,27 @@
               "null"
             ],
             "description": "Response time in ms"
+          },
+          "og": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Open Graph title, description, image"
+          },
+          "twitterCard": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "twitter:card value"
+          },
+          "wordCount": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Words of visible text"
           }
         }
       }

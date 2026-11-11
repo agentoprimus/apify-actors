@@ -86,9 +86,21 @@ function analyze(html, url) {
   } else {
     issues.push({ level: 'warn', code: 'not-https', msg: 'Page is served over plain HTTP' });
   }
+  const og = { title: $('meta[property="og:title"]').attr('content') || '', description: $('meta[property="og:description"]').attr('content') || '', image: $('meta[property="og:image"]').attr('content') || '' };
+  const twitterCard = $('meta[name="twitter:card"]').attr('content') || '';
+  const bodyText = $('body').clone().find('script,style,noscript,template').remove().end().text().replace(/\s+/g, ' ').trim();
+  const wordCount = bodyText ? bodyText.split(' ').length : 0;
+  const imgsNoSize = $('img').filter((_, e) => !$(e).attr('width') || !$(e).attr('height')).length;
+  const canonicals = $('link[rel="canonical"]').length;
+  if (!og.title || !og.image) issues.push({ level: 'warn', code: 'og-missing', msg: `Open Graph ${[!og.title && 'og:title', !og.image && 'og:image'].filter(Boolean).join(' and ')} missing (poor link previews on social/chat)` });
+  if (!twitterCard) issues.push({ level: 'info', code: 'twitter-card-missing', msg: 'No twitter:card meta' });
+  if (wordCount > 0 && wordCount < 200) issues.push({ level: 'info', code: 'thin-content', msg: `Only ${wordCount} words of text` });
+  if (imgsNoSize) issues.push({ level: 'info', code: 'img-size-missing', msg: `${imgsNoSize} <img> without width/height (can cause layout shift)` });
+  if (canonicals > 1) issues.push({ level: 'error', code: 'canonical-multiple', msg: `${canonicals} canonical links` });
+  if ($('meta[http-equiv="refresh" i]').length) issues.push({ level: 'warn', code: 'meta-refresh', msg: 'Uses meta refresh redirect' });
   if (imgsNoAlt) issues.push({ level: 'warn', code: 'img-alt-missing', msg: `${imgsNoAlt} <img> without alt` });
 
-  return { title, description: desc, h1, canonical, robotsMeta, lang, hreflang, schemaTypes, links: [...new Set(links)], issues };
+  return { title, description: desc, h1, canonical, robotsMeta, lang, hreflang, schemaTypes, og, twitterCard, wordCount, links: [...new Set(links)], issues };
 }
 
 export async function crawl(startUrl, { maxPages = 20, delayMs = 1000, checkExternal = true, log = () => {} } = {}) {

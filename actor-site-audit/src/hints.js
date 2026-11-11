@@ -25,4 +25,10 @@ export const HINTS = {
   'orphan-pages': 'Link to these pages from your navigation or content; pages without internal links are hard to discover.',
   'mixed-content': 'Load these resources over https:// (browsers block or warn about http:// content on https pages).',
   'not-https': 'Serve the site over HTTPS and redirect http:// to https://.',
+  'og-missing': 'Add <meta property="og:title"> and <meta property="og:image"> (1200x630) so shared links show a rich preview.',
+  'twitter-card-missing': 'Add <meta name="twitter:card" content="summary_large_image"> for rich previews on X/Twitter.',
+  'thin-content': 'Pages with very little text rarely rank; expand the content or noindex utility pages.',
+  'img-size-missing': 'Set width and height attributes on images so the browser reserves space (better CLS).',
+  'canonical-multiple': 'Keep exactly one rel=canonical per page; multiple canonicals are ignored by search engines.',
+  'meta-refresh': 'Replace meta refresh with a server-side 301 redirect.',
 };

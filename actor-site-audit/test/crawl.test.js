@@ -16,8 +16,9 @@ const page = (path) => r.pages.find((p) => p.url === 'http://localhost:8799' + p
 const codes = (path) => (page(path).issues || []).map((i) => i.code);
 
 test('respects robots.txt', () => assert.equal(page('/private/x').skipped, 'robots.txt'));
-test('home page: relative canonical + not-https (local http fixture)', () => assert.deepEqual(codes('/').sort(), ['canonical-relative', 'not-https']));
-test('page scores', () => { assert.equal(page('/').score, 90); assert.ok(page('/bad').score < 60); });
+test('home page: expected issues only', () => assert.deepEqual(codes('/').sort(), ['canonical-relative', 'not-https', 'og-missing', 'thin-content', 'twitter-card-missing']));
+test('og missing detected', () => assert.ok(codes('/about').includes('og-missing')));
+test('page scores', () => { assert.equal(page('/').score, 83); assert.ok(page('/bad').score < 60); });
 test('redirect chain detected, target not re-analyzed', () => {
   assert.equal(page('/old').initialStatus, 301);
   assert.ok(codes('/old').includes('redirect-chain'));

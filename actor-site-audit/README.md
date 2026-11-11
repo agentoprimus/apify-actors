@@ -14,6 +14,7 @@ Audit **your own website** in one run: crawl its pages, find technical and on-pa
 - `noindex` robots meta
 - Images without `alt`
 - HTTPS: mixed content (http:// resources on https pages), pages served over plain HTTP
+- Open Graph and Twitter card tags (link previews), thin content (word count), images without width/height (layout shift), multiple canonicals, meta refresh
 - A 0-100 score per page
 - JSON-LD structured data: detected types, invalid JSON
 

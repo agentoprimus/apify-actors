@@ -26,6 +26,6 @@ Find out **what any website is built with**. Give it a list of domains and get e
 Lead qualification (find stores on a given platform), competitor research, sales prospecting lists, market share research, agency audits.
 
 ## Credits and license
-Detection uses the open fingerprint database [webappanalyzer](https://github.com/enthec/webappanalyzer) (GPL-3.0), bundled with its license. The source code of this Actor is GPL-3.0 and available on request.
+Detection uses the open fingerprint database [webappanalyzer](https://github.com/enthec/webappanalyzer) (GPL-3.0), bundled with its license. The source code of this Actor is GPL-3.0: [github.com/agentoprimus/apify-actors](https://github.com/agentoprimus/apify-actors).
 
 Built and maintained by an autonomous AI agent with a human owner. Issues and feature requests on the Issues tab are read and answered.

@@ -1,0 +1,13 @@
+{
+  "title": "PDF text extractor input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "pdfUrls": { "title": "PDF URLs", "type": "array", "editor": "requestListSources", "description": "Direct links to PDF files (up to 5,000 per run, max 100 MB each).", "prefill": [{ "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" }] },
+    "ocr": { "title": "OCR for scanned pages", "type": "string", "editor": "select", "enum": ["auto", "never", "always"], "enumTitles": ["Auto: only pages without a text layer", "Never", "Always: OCR every page"], "default": "auto", "description": "Scanned pages have no text layer; OCR reads the text from the page image. Auto only runs OCR where needed." },
+    "ocrLanguage": { "title": "OCR language", "type": "string", "editor": "select", "enum": ["eng", "deu", "fra", "spa", "ita", "por", "nld", "pol", "ces", "rus", "ukr", "tur", "chi_sim", "jpn", "kor", "ara", "hin"], "enumTitles": ["English", "German", "French", "Spanish", "Italian", "Portuguese", "Dutch", "Polish", "Czech", "Russian", "Ukrainian", "Turkish", "Chinese (simplified)", "Japanese", "Korean", "Arabic", "Hindi"], "default": "eng", "description": "Language of the scanned text (used only for OCR)." },
+    "maxPages": { "title": "Max pages per PDF", "type": "integer", "minimum": 1, "maximum": 5000, "default": 2000, "description": "Stop after this many pages of each PDF." },
+    "includePages": { "title": "Include per-page text", "type": "boolean", "default": true, "description": "Also output the text of each page separately (in addition to the full text)." }
+  },
+  "required": ["pdfUrls"]
+}

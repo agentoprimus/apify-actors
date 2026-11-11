@@ -1,0 +1,174 @@
+{
+  "actorSpecification": 1,
+  "name": "pdf-text-extractor",
+  "title": "PDF Text Extractor with OCR (bulk, per page)",
+  "description": "Extract text from PDF files by URL: full text plus per-page text, metadata (title, author, dates), word counts, and automatic OCR for scanned pages in 17 languages. Bulk, only successful PDFs are charged.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PDF URL"
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if extracted"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error if the PDF failed"
+          },
+          "fileSizeBytes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "PDF size in bytes"
+          },
+          "pageCount": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Pages in the PDF"
+          },
+          "pagesExtracted": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Pages extracted"
+          },
+          "ocrPages": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Pages read with OCR"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PDF title metadata"
+          },
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PDF author metadata"
+          },
+          "subject": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PDF subject"
+          },
+          "keywords": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PDF keywords"
+          },
+          "creator": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Creating application"
+          },
+          "producer": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "PDF producer"
+          },
+          "creationDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Creation date (PDF format)"
+          },
+          "modDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Modification date (PDF format)"
+          },
+          "chars": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Characters of text"
+          },
+          "words": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Word count"
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Full text of all pages"
+          },
+          "pages": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Per page: page, method (text/ocr), chars, text"
+          }
+        }
+      },
+      "views": {
+        "overview": {
+          "title": "PDFs",
+          "transformation": {
+            "fields": [
+              "url",
+              "ok",
+              "pageCount",
+              "ocrPages",
+              "words",
+              "title",
+              "text",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  }
+}

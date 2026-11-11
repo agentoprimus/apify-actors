@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+import { writeFileSync, mkdirSync } from 'node:fs';
+mkdirSync(new URL('./fixtures/', import.meta.url), { recursive: true });
+const b = await chromium.launch(); const p = await b.newPage();
+await p.setContent('<html><head><title>Fixture Doc</title></head><body style="font:16px serif"><h1>Quarterly Report</h1><p>Revenue grew by 42 percent.</p><div style="page-break-after:always"></div><h2>Second page</h2><p>Hello from page two.</p></body></html>');
+writeFileSync(new URL('./fixtures/text.pdf', import.meta.url), await p.pdf({ format: 'A4' }));
+await p.setViewportSize({ width: 900, height: 300 });
+await p.setContent('<body style="margin:0;background:#fff"><div style="font:bold 48px Arial;padding:40px">SCANNED INVOICE 12345</div></body>');
+const png = await p.screenshot();
+await p.setContent(`<body style="margin:0"><img src="data:image/png;base64,${png.toString('base64')}" style="width:100%"></body>`);
+writeFileSync(new URL('./fixtures/scanned.pdf', import.meta.url), await p.pdf({ format: 'A4' }));
+await b.close(); console.log('fixtures ok');

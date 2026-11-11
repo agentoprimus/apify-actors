@@ -43,6 +43,7 @@ Audit **your own website** in one run: crawl its pages, find technical and on-pa
 | `lighthousePages` | 1 | 0 to disable, max 20 |
 | `formFactor` | mobile | `mobile` or `desktop` |
 | `checkExternalLinks` | true | Check outbound links for 4xx/5xx |
+| `renderJs` | false | Analyze pages after JavaScript runs (React, Vue, Next.js and other single-page apps) |
 
 ## Polite by design
 
@@ -68,6 +69,8 @@ On the Apify **free plan** ($5 of monthly credit) that's about **38 default audi
 
 ## FAQ
 **Can I audit any website?** Please audit only sites you own or have permission to test. The crawler is polite (robots.txt, 1 request per second) but it is still a crawl.
+
+**My single-page app shows missing titles or H1s.** Turn on **Render JavaScript** so pages are analyzed after scripts run.
 
 **Why does a page show `skipped (robots.txt)`?** Your robots.txt disallows it, and the crawler respects that.
 

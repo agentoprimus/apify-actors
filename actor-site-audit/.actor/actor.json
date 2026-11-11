@@ -157,6 +157,20 @@
               "null"
             ],
             "description": "Words of visible text"
+          },
+          "rendered": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if analyzed after JavaScript rendering"
+          },
+          "renderError": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Rendering error, if any"
           }
         }
       }

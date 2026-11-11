@@ -48,6 +48,12 @@
       "type": "boolean",
       "default": true,
       "description": "HEAD-request outbound links to find broken ones (max 1 request/second per host)."
+    },
+    "renderJs": {
+      "title": "Render JavaScript",
+      "type": "boolean",
+      "default": false,
+      "description": "Analyze pages after JavaScript runs (for React, Vue, Next.js and other single-page apps). Slower; turn on if checks report missing titles/H1 that you can see in the browser."
     }
   },
   "required": [

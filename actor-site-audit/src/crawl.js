@@ -103,7 +103,13 @@ function analyze(html, url) {
   return { title, description: desc, h1, canonical, robotsMeta, lang, hreflang, schemaTypes, og, twitterCard, wordCount, links: [...new Set(links)], issues };
 }
 
-export async function crawl(startUrl, { maxPages = 20, delayMs = 1000, checkExternal = true, log = () => {} } = {}) {
+export async function crawl(startUrl, { maxPages = 20, delayMs = 1000, checkExternal = true, renderJs = false, log = () => {} } = {}) {
+  let browser = null, bctx = null;
+  if (renderJs) { const { chromium } = await import('playwright'); browser = await chromium.launch({ args: ['--no-sandbox', '--disable-dev-shm-usage'] }); bctx = await browser.newContext({ userAgent: UA }); }
+  try {
+  return await crawlInner();
+  } finally { if (browser) await browser.close(); }
+  async function crawlInner() {
   const origin = new URL(startUrl).origin;
   const robots = await fetchRobots(origin);
   const queue = [startUrl], seen = new Set([startUrl]), pages = [], analyzed = new Set();
@@ -134,7 +140,13 @@ export async function crawl(startUrl, { maxPages = 20, delayMs = 1000, checkExte
         page.redirectsToAnalyzedPage = true;
       } else if (res && res.ok && ct.includes('text/html')) {
         analyzed.add(finalUrl);
-        const html = await res.text();
+        let html = await res.text();
+        if (bctx) { // render JavaScript: analyze the DOM as a browser sees it
+          const pg = await bctx.newPage();
+          try { await pg.goto(finalUrl, { waitUntil: 'load', timeout: 30000 }); await pg.waitForTimeout(1500); html = await pg.content(); page.rendered = true; }
+          catch (e) { page.renderError = String(e.message || e).split('\n')[0]; }
+          finally { await pg.close(); }
+        }
         page.bytes = html.length;
         const a = analyze(html, finalUrl);
         page = { ...page, ...a, issues: [...(page.issues || []), ...a.issues] };
@@ -192,4 +204,5 @@ export async function crawl(startUrl, { maxPages = 20, delayMs = 1000, checkExte
   const PEN = { error: 15, warn: 5, info: 1 };
   for (const p of pages) if (!p.skipped) p.score = Math.max(0, 100 - (p.issues || []).reduce((s, i) => s + PEN[i.level], 0));
   return { site, pages, brokenLinks: broken };
+  }
 }

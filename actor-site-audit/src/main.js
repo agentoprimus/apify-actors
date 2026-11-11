@@ -4,7 +4,7 @@ import { audit } from './audit.js';
 
 await Actor.init();
 const input = (await Actor.getInput()) || {};
-const { startUrl, maxPages = 10, lighthousePages = 1, formFactor = 'mobile', checkExternalLinks = true } = input;
+const { startUrl, maxPages = 10, lighthousePages = 1, formFactor = 'mobile', checkExternalLinks = true, renderJs = false } = input;
 if (!startUrl || !/^https?:\/\//.test(startUrl)) throw new Error('Input "startUrl" must be an http(s) URL.');
 
 const r = await audit(startUrl, {
@@ -12,6 +12,7 @@ const r = await audit(startUrl, {
   lighthousePages: Math.min(Math.max(0, lighthousePages), 20),
   formFactor,
   checkExternal: checkExternalLinks,
+  renderJs,
   log: (m) => log.info(m),
 });
 

@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Domain check output",
+  "properties": {
+    "domains": {
+      "type": "string",
+      "title": "Domains",
+      "description": "One row per domain: availability, registrar, dates, nameservers.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

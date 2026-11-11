@@ -1,0 +1,40 @@
+{
+  "title": "Domain checker input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "domains": {
+      "title": "Domains",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Domains to check, one per line (URLs are fine; www. is stripped). Up to 20,000.",
+      "prefill": [
+        "example.com",
+        "agentoprimus-demo-check.com"
+      ]
+    },
+    "keywords": {
+      "title": "Keywords (name ideas)",
+      "type": "array",
+      "editor": "stringList",
+      "description": "Optional: brand or name ideas. Each is combined with every TLD below, e.g. 'acme' + com, io, ai."
+    },
+    "tlds": {
+      "title": "TLDs for keywords",
+      "type": "array",
+      "editor": "stringList",
+      "description": "TLDs to combine with keywords (without the dot). Default: com.",
+      "prefill": [
+        "com",
+        "io",
+        "ai",
+        "co",
+        "net",
+        "org",
+        "dev",
+        "app"
+      ]
+    }
+  },
+  "required": []
+}

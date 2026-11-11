@@ -1,0 +1,154 @@
+{
+  "actorSpecification": 1,
+  "name": "domain-availability-whois-checker",
+  "title": "Domain Availability & WHOIS Checker (RDAP, bulk)",
+  "description": "Bulk check if domains are available or registered, and get registration data from official RDAP registries: registrar, creation and expiry dates, status, nameservers, DNSSEC. Generate name ideas from keywords x TLDs.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "minMemoryMbytes": 128,
+  "maxMemoryMbytes": 1024,
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "domain": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Domain checked"
+          },
+          "tld": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Top-level domain"
+          },
+          "available": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "true = available to register, false = registered, null = unknown"
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "available, registered, likely-available (no RDAP, no DNS) or unknown"
+          },
+          "method": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "rdap or dns"
+          },
+          "registrar": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Registrar name"
+          },
+          "registrarIanaId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Registrar IANA ID"
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Registration date"
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Last changed date"
+          },
+          "expiresAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Expiration date"
+          },
+          "statuses": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "EPP status codes"
+          },
+          "nameservers": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Nameservers"
+          },
+          "dnssec": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "DNSSEC signed"
+          },
+          "rdapServer": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "RDAP server used"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error if unknown"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Extra info"
+          }
+        }
+      },
+      "views": {
+        "overview": {
+          "title": "Domains",
+          "transformation": {
+            "fields": [
+              "domain",
+              "available",
+              "status",
+              "registrar",
+              "createdAt",
+              "expiresAt",
+              "nameservers"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  }
+}

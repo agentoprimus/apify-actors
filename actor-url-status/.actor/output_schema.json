@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "URL status output",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "URL status",
+      "description": "One row per URL: status, redirects, timing, title, SSL expiry.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

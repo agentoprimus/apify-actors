@@ -1,0 +1,51 @@
+{
+  "title": "URL status checker input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "urls": {
+      "title": "URLs",
+      "type": "array",
+      "editor": "stringList",
+      "description": "URLs or domains to check, one per line. Up to 50,000 per run.",
+      "prefill": [
+        "https://crawler-test.com/",
+        "http://crawler-test.com/redirects/redirect_chain_allowed",
+        "https://crawler-test.com/status_codes/status_404"
+      ]
+    },
+    "checkSsl": {
+      "title": "Check SSL certificate",
+      "type": "boolean",
+      "default": true,
+      "description": "For https URLs, report certificate expiry date, days left, issuer and validity."
+    },
+    "maxRedirects": {
+      "title": "Max redirects",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20,
+      "default": 10,
+      "description": "Stop following redirects after this many (reported as an error)."
+    },
+    "timeoutSecs": {
+      "title": "Timeout per request (s)",
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 60,
+      "default": 20,
+      "description": "Request timeout."
+    },
+    "maxConcurrency": {
+      "title": "Parallel requests",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30,
+      "default": 10,
+      "description": "Overall parallelism. Each host gets at most ~2 requests per second."
+    }
+  },
+  "required": [
+    "urls"
+  ]
+}

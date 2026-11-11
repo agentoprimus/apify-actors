@@ -1,0 +1,183 @@
+{
+  "actorSpecification": 1,
+  "name": "bulk-url-status-redirect-checker",
+  "title": "Bulk URL Status, Redirect & SSL Checker",
+  "description": "Check thousands of URLs: HTTP status code, full redirect chain, final URL, response time, page title, canonical, robots and SSL certificate expiry. Find 404s, redirect chains and expiring certificates.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "minMemoryMbytes": 128,
+  "maxMemoryMbytes": 1024,
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "fields": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL checked"
+          },
+          "ok": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if final status < 400"
+          },
+          "status": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Final HTTP status"
+          },
+          "finalUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "URL after redirects"
+          },
+          "redirected": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if redirected"
+          },
+          "redirects": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Number of redirects"
+          },
+          "redirectChain": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Each hop: url, status, ms"
+          },
+          "totalMs": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Total time (ms)"
+          },
+          "contentType": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Content-Type"
+          },
+          "contentLength": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Content-Length"
+          },
+          "server": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Server header"
+          },
+          "title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "HTML title"
+          },
+          "canonical": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "rel=canonical"
+          },
+          "robots": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "X-Robots-Tag / meta robots"
+          },
+          "certValidTo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "SSL certificate expiry"
+          },
+          "certDaysLeft": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Days until certificate expiry"
+          },
+          "certIssuer": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Certificate issuer"
+          },
+          "certValid": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Certificate trusted for hostname"
+          },
+          "certError": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Certificate error"
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Error (timeout, DNS, loop...)"
+          }
+        }
+      },
+      "views": {
+        "overview": {
+          "title": "URLs",
+          "transformation": {
+            "fields": [
+              "url",
+              "status",
+              "finalUrl",
+              "redirects",
+              "totalMs",
+              "title",
+              "certDaysLeft",
+              "error"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  }
+}

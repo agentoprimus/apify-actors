@@ -1,7 +1,7 @@
 {
   "actorSpecification": 1,
   "name": "ai-crawler-access-checker",
-  "title": "AI Crawler Access Checker (robots.txt: GPTBot, ClaudeBot, Perplexity, llms.txt)",
+  "title": "AI Crawler Access Checker (GPTBot, ClaudeBot, llms.txt)",
   "description": "See which AI crawlers a website allows or blocks in robots.txt: GPTBot, OAI-SearchBot, ClaudeBot, Google-Extended, PerplexityBot, CCBot, Bytespider and more, plus llms.txt and sitemap detection. Bulk, for SEO / GEO audits.",
   "version": "0.1",
   "input": "./input_schema.json",

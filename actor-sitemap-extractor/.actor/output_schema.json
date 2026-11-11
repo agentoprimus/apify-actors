@@ -1,0 +1,18 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Sitemap extractor output",
+  "properties": {
+    "urls": {
+      "title": "URLs",
+      "description": "One row per URL found in the sitemaps: url, lastmod, changefreq, priority, images, hreflang alternates, source sitemap, optional HTTP status.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items",
+      "type": "string"
+    },
+    "sitemaps": {
+      "title": "Sitemaps processed (JSON)",
+      "description": "Every sitemap file processed, with type, URL count, gzip flag and errors.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SITEMAPS",
+      "type": "string"
+    }
+  }
+}

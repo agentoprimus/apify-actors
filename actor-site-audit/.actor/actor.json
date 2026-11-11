@@ -1,0 +1,34 @@
+{
+  "actorSpecification": 1,
+  "name": "website-seo-technical-audit",
+  "title": "Website SEO & Technical Audit (Lighthouse + Crawler)",
+  "description": "Audit your own website: crawl pages, find broken links, redirect chains, missing titles/meta/H1/canonical, invalid schema, noindex, duplicate titles, plus Lighthouse scores and Core Web Vitals. Get a clean HTML report.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Pages",
+          "transformation": {
+            "fields": [
+              "url",
+              "score",
+              "status",
+              "title",
+              "description",
+              "issues",
+              "lighthouse"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  },
+  "output": "./output_schema.json"
+}

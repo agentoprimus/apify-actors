@@ -1,0 +1,42 @@
+{
+  "title": "Sitemap extractor input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Websites or sitemap URLs",
+      "type": "array",
+      "editor": "requestListSources",
+      "description": "A site home page (sitemaps are discovered from robots.txt, falling back to /sitemap.xml) or a direct sitemap / sitemap index URL.",
+      "prefill": [
+        {
+          "url": "https://crawler-test.com/"
+        }
+      ]
+    },
+    "maxUrls": {
+      "title": "Max URLs",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100000,
+      "default": 10000,
+      "description": "Stop after this many URLs (across all sitemaps).",
+      "prefill": 500
+    },
+    "checkStatus": {
+      "title": "Check HTTP status of each URL",
+      "type": "boolean",
+      "default": false,
+      "description": "Sends one HEAD request per URL (2 per second) and reports status codes and redirect targets. Finds 404s and redirects listed in your sitemap."
+    },
+    "sameOriginOnly": {
+      "title": "Only URLs on the sitemap's own domain",
+      "type": "boolean",
+      "default": false,
+      "description": "Skip URLs whose domain differs from the sitemap file's domain."
+    }
+  },
+  "required": [
+    "startUrls"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "actorSpecification": 1,
+  "name": "website-screenshot",
+  "title": "Website Screenshot (Full Page, Mobile, PDF, No Cookie Banners)",
+  "description": "Screenshot many URLs in one run: desktop, laptop, tablet and mobile, full page or a single element, PNG/JPEG/PDF, with cookie banners hidden, dark mode, and wait-for-selector. Only successful screenshots are charged.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json",
+  "dockerfile": "../Dockerfile",
+  "storages": { "dataset": { "actorSpecification": 1, "views": { "overview": { "title": "Screenshots", "transformation": { "fields": ["screenshotUrl", "url", "device", "status", "title", "ok", "error"] }, "display": { "component": "table", "properties": { "screenshotUrl": { "format": "image" } } } } } } }
+}

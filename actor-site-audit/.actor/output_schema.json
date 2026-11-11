@@ -1,0 +1,30 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Website audit output",
+  "properties": {
+    "report": {
+      "title": "HTML report",
+      "description": "Self-contained HTML audit report with scores, issues, fix hints and broken links.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/REPORT",
+      "type": "string"
+    },
+    "pages": {
+      "title": "Pages",
+      "description": "One row per crawled page with status, SEO fields, issues (with fix hints) and Lighthouse results.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items",
+      "type": "string"
+    },
+    "summary": {
+      "title": "Summary (JSON)",
+      "description": "Health score, issue counts, Lighthouse averages and top issues.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/SUMMARY",
+      "type": "string"
+    },
+    "brokenLinks": {
+      "title": "Broken links (JSON)",
+      "description": "Broken links with status codes and the pages they were found on.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/BROKEN_LINKS",
+      "type": "string"
+    }
+  }
+}

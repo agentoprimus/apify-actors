@@ -1,0 +1,56 @@
+{
+  "title": "Website audit input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrl": {
+      "title": "Start URL",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Home page of the website to audit. Only audit sites you own or are allowed to test.",
+      "prefill": "https://crawler-test.com/"
+    },
+    "maxPages": {
+      "title": "Max pages to crawl",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 500,
+      "default": 10,
+      "description": "Same-origin pages only. The crawler respects robots.txt and fetches 1 page per second.",
+      "prefill": 10
+    },
+    "lighthousePages": {
+      "title": "Pages to run Lighthouse on",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 20,
+      "default": 1,
+      "description": "Lighthouse runs on the first N pages found (starting with the start URL). 0 disables it.",
+      "prefill": 1
+    },
+    "formFactor": {
+      "title": "Lighthouse device",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "mobile",
+        "desktop"
+      ],
+      "enumTitles": [
+        "Mobile",
+        "Desktop"
+      ],
+      "default": "mobile",
+      "description": "Device emulation for Lighthouse: mobile (throttled, like Google PageSpeed) or desktop."
+    },
+    "checkExternalLinks": {
+      "title": "Check external links",
+      "type": "boolean",
+      "default": true,
+      "description": "HEAD-request outbound links to find broken ones (max 1 request/second per host)."
+    }
+  },
+  "required": [
+    "startUrl"
+  ]
+}

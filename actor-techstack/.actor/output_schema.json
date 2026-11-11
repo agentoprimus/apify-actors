@@ -1,0 +1,7 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Tech stack output",
+  "properties": {
+    "sites": { "type": "string", "title": "Sites", "description": "One row per website: detected technologies (name, version, categories, confidence, website), grouped by category.", "template": "{{links.apiDefaultDatasetUrl}}/items" }
+  }
+}

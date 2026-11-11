@@ -1,0 +1,8 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Website screenshot output",
+  "properties": {
+    "screenshots": { "type": "string", "title": "Screenshots", "description": "One row per URL x device with a direct link to the image/PDF (screenshotUrl), HTTP status, page title and errors.", "template": "{{links.apiDefaultDatasetUrl}}/items" },
+    "files": { "type": "string", "title": "Files (key-value store)", "description": "All screenshot files.", "template": "{{links.apiDefaultKeyValueStoreUrl}}/keys" }
+  }
+}

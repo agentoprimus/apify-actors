@@ -1,0 +1,23 @@
+import { test, before, after } from 'node:test';
+import assert from 'node:assert/strict';
+import { server } from './fixture.js';
+import { withBrowser, collect } from '../src/collect.js';
+import { analyze, loadDb } from '../src/detect.js';
+let techs, t0;
+before(async () => {
+  await new Promise((ok) => server.listen(8796, '127.0.0.1', ok));
+  t0 = Date.now();
+  const page = await withBrowser((b) => collect(b, 'http://localhost:8796/', { waitMs: 500 }));
+  techs = analyze(page);
+});
+after(() => server.close());
+const get = (n) => techs.find((t) => t.name === n);
+test('db loads', () => assert.ok(loadDb().list.length > 5000));
+test('WordPress + version', () => { assert.ok(get('WordPress')); assert.equal(get('WordPress').version, '6.4.2'); });
+test('jQuery + version', () => { assert.ok(get('jQuery')); assert.equal(get('jQuery').version, '3.7.1'); });
+test('Nginx + version', () => { assert.ok(get('Nginx')); assert.equal(get('Nginx').version, '1.24.0'); });
+test('PHP (header or implied)', () => assert.ok(get('PHP')));
+test('Google Tag Manager or Analytics', () => assert.ok(get('Google Tag Manager') || get('Google Analytics')));
+test('MySQL implied by WordPress', () => assert.ok(get('MySQL')));
+test('categories present', () => assert.ok(get('WordPress').categories.includes('CMS')));
+test('fast enough', () => assert.ok(Date.now() - t0 < 20000));

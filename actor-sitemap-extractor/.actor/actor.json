@@ -1,0 +1,34 @@
+{
+  "actorSpecification": 1,
+  "name": "sitemap-url-extractor",
+  "title": "Sitemap URL Extractor (index, .gz, lastmod, status codes)",
+  "description": "Get every URL from a website's XML sitemaps: auto-discovery via robots.txt, sitemap indexes, gzipped sitemaps, lastmod/changefreq/priority, images and hreflang, plus optional HTTP status check for each URL.",
+  "version": "0.1",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "URLs",
+          "transformation": {
+            "fields": [
+              "url",
+              "lastmod",
+              "changefreq",
+              "priority",
+              "status",
+              "redirectTo",
+              "sitemap"
+            ]
+          },
+          "display": {
+            "component": "table"
+          }
+        }
+      }
+    }
+  },
+  "output": "./output_schema.json"
+}
